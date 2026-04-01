@@ -1,38 +1,317 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #ffe4f0, #ffc2d4);
   min-height: 100vh;
+  padding: 30px 20px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #c2185b;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+/* MONITOR */
+.monitor {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.monitor-box {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 18px 10px;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(233, 30, 140, 0.2);
+}
+
+.monitor-count {
+  font-size: 2.2rem;
+  font-weight: bold;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.monitor-label {
+  font-size: 0.78rem;
+  color: white;
+  margin-top: 5px;
+  font-weight: 500;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.not-started { background: linear-gradient(135deg, #f48fb1, #f06292); }
+.in-progress { background: linear-gradient(135deg, #e91e8c, #d81b60); }
+.accomplished { background: linear-gradient(135deg, #c2185b, #880e4f); }
+
+/* INPUT CARD */
+.input-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 20px rgba(233, 30, 140, 0.15);
+}
+
+.input-card h2 {
+  color: #c2185b;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-row input[type="text"] {
+  width: 100%;
+  padding: 12px 18px;
+  border: 2px solid #f48fb1;
+  border-radius: 30px;
+  outline: none;
+  font-size: 0.95rem;
+  background: #fff0f5;
+  color: #880e4f;
+}
+
+.input-row input[type="text"]::placeholder {
+  color: #f48fb1;
+}
+
+.input-bottom {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input-bottom input[type="date"],
+.input-bottom select {
+  flex: 1;
+  padding: 10px 15px;
+  border: 2px solid #f48fb1;
+  border-radius: 30px;
+  outline: none;
+  font-size: 0.9rem;
+  background: #fff0f5;
+  color: #880e4f;
+  cursor: pointer;
+}
+
+.input-bottom button {
+  padding: 10px 25px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(233, 30, 140, 0.3);
+  transition: all 0.2s;
+}
+
+.input-bottom button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(233, 30, 140, 0.4);
+}
+
+/* NOTES LIST */
+.notes-list h2 {
+  color: #c2185b;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.note {
+  background: white;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(233, 30, 140, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.2s;
+}
+
+.note:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 30, 140, 0.2);
+}
+
+.note.done {
+  background: #fce4ec;
+  opacity: 0.85;
+}
+
+.note-info {
+  text-align: left;
+  flex: 1;
+}
+
+.note-text {
+  color: #880e4f;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.accomplished-text {
+  text-decoration: line-through;
+  color: #c2185b;
+  opacity: 0.6;
+}
+
+.deadline {
+  font-size: 0.78rem;
+  color: #e91e8c;
+  background: #fff0f5;
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 3px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.badge-not-started { background: #fce4ec; color: #e91e8c; }
+.badge-in-progress { background: #f8bbd0; color: #c2185b; }
+.badge-accomplished { background: #f48fb1; color: white; }
+
+.note-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+  min-width: 130px;
+}
+
+.note-actions select {
+  padding: 7px 10px;
+  border: 2px solid #f48fb1;
+  border-radius: 20px;
+  outline: none;
+  font-size: 0.82rem;
+  background: #fff0f5;
+  color: #880e4f;
+  cursor: pointer;
+  width: 100%;
+}
+
+.note-actions button {
+  background: #f48fb1;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.note-actions button:hover {
+  background: #e91e8c;
+}
+
+.empty {
+  text-align: center;
+  color: #f48fb1;
+  font-size: 0.95rem;
+  padding: 20px;
+}
+
+/* EDIT FORM */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.edit-form input[type="text"] {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #e91e8c;
+  border-radius: 20px;
+  outline: none;
+  font-size: 0.95rem;
+  background: #fff0f5;
+  color: #880e4f;
+}
+
+.edit-bottom {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-bottom input[type="date"],
+.edit-bottom select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #f48fb1;
+  border-radius: 20px;
+  outline: none;
+  font-size: 0.85rem;
+  background: #fff0f5;
+  color: #880e4f;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #e91e8c, #c2185b) !important;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  flex: 1;
+  background: #f48fb1 !important;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: linear-gradient(135deg, #f48fb1, #e91e8c) !important;
 }
