@@ -81,8 +81,9 @@ function App() {
     setEditStatus("");
   };
 
-  useEffect(() => {
+useEffect(() => {
     fetchNotes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const notStarted = notes.filter((n) => n.status === "Not Started").length;
